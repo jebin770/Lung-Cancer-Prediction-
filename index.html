@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PulmoGuard AI - Advanced Lung Cancer Prediction & Health Dashboard</title>
+    <meta name="description" content="Clinical-grade AI-powered lung cancer risk assessment, symptom tracking, and historical health analytics dashboard.">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons for high-end medical icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         AUTHENTICATION SECTION (LungPredict Landing Page)
+         ========================================================================== -->
+    <section id="auth-section">
+        
+        <!-- LEFT COLUMN - Brand, badge, illustrations, feature grid, HIPAA -->
+        <div class="landing-info-pane">
+            
+            <!-- Logo Section -->
+            <div class="landing-brand-header">
+                <div class="landing-logo-box">
+                    <i data-lucide="activity" style="width: 24px; height: 24px;"></i>
+                </div>
+                <div class="landing-brand-text">
+                    <h2>LungPredict</h2>
+                    <span>AI POWERED HEALTHCARE</span>
+                </div>
+            </div>
+
+            <!-- Hero & Lungs Illustration -->
+            <div class="landing-hero-box">
+                <div class="ai-pill-badge">
+                    <span>✦ AI-Powered Lung Cancer Prediction</span>
+                </div>
+                <h1>Detect Early.<br><span class="hero-gradient-text">Breathe Better.</span></h1>
+                <p>Advanced AI technology to predict lung cancer risk from CT scan analysis with high accuracy.</p>
+            </div>
+
+            <!-- Transparent Glowing Lungs Illustration with Rotating orbits & infected area node -->
+            <div class="lungs-illustration-container">
+                <div class="lungs-graphic-wrapper">
+                    <!-- Orbiting medical dashed lines -->
+                    <div class="lungs-orbit">
+                        <div class="lungs-orbit-dot"></div>
+                    </div>
+                    <!-- Lungs Vector SVG -->
+                    <svg viewBox="0 0 100 100" class="lungs-vector" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Left lung lobe outline -->
+                        <path d="M45,20 C35,20 20,25 20,45 C20,65 30,85 45,90 C45,75 42,60 45,45 Z" />
+                        <!-- Right lung lobe outline -->
+                        <path d="M55,20 C65,20 80,25 80,45 C80,65 70,85 55,90 C55,75 58,60 55,45 Z" />
+                        <!-- Trachea tube -->
+                        <path d="M50,10 L50,30" stroke-width="3" />
+                        <!-- Left bronchi -->
+                        <path d="M50,30 Q46,38 38,42" />
+                        <!-- Right bronchi -->
+                        <path d="M50,30 Q54,38 62,42" />
+                    </svg>
+                    <!-- Pulse glow representing the infection/infected area node -->
+                    <div class="infected-lung-pulse" title="AI Lung Detection Area"></div>
+                </div>
+            </div>
+
+            <!-- Feature Cards Grid (2x2) -->
+            <div class="landing-feature-grid">
+                <!-- Card 1 -->
+                <div class="landing-feat-card">
+                    <div class="landing-feat-icon">
+                        <i data-lucide="scan" style="width: 20px; height: 20px;"></i>
+                    </div>
+                    <h4>CT Scan Analysis</h4>
+                    <p>Upload and analyze CT scans with AI precision.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="landing-feat-card">
+                    <div class="landing-feat-icon">
+                        <i data-lucide="brain" style="width: 20px; height: 20px;"></i>
+                    </div>
+                    <h4>AI Risk Prediction</h4>
+                    <p>Get accurate risk prediction using deep learning.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="landing-feat-card">
+                    <div class="landing-feat-icon">
+                        <i data-lucide="shield-check" style="width: 20px; height: 20px;"></i>
+                    </div>
+                    <h4>Health Assessment</h4>
+                    <p>Comprehensive assessment of your lung health.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="landing-feat-card">
+                    <div class="landing-feat-icon">
+                        <i data-lucide="bar-chart-3" style="width: 20px; height: 20px;"></i>
+                    </div>
+                    <h4>Medical Analytics</h4>
+                    <p>Detailed insights and reports for better decisions.</p>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- RIGHT COLUMN - Interactive Floating Signup Form Card -->
+        <div class="landing-form-pane">
+            
+            <div class="landing-signup-card" id="register-form-view" style="display: none;">
+                <div class="signup-card-header">
+                    <div class="signup-avatar-box">
+                        <i data-lucide="user-plus" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3>Create Your Account</h3>
+                    <p>Join us in the fight against lung cancer</p>
+                </div>
+
+                <form id="register-form" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <label for="register-name">Full Name</label>
+                        <div class="input-container">
+                            <i data-lucide="user" style="width: 18px; height: 18px;"></i>
+                            <input type="text" id="register-name" class="input-control" placeholder="John Doe" required autocomplete="name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-email">Email Address</label>
+                        <div class="input-container">
+                            <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+                            <input type="email" id="register-email" class="input-control" placeholder="name@health.com" required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="register-password">Password</label>
+                        <div class="input-container">
+                            <i data-lucide="lock" style="width: 18px; height: 18px;"></i>
+                            <input type="password" id="register-password" class="input-control" placeholder="Min. 8 characters" required autocomplete="new-password">
+                        </div>
+                    </div>
+
+
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="register-terms" required>
+                        <label for="register-terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
+                        <span>Start Prediction →</span>
+                    </button>
+
+                    <div class="landing-form-footer">
+                        Already have an account? <a href="#" id="go-to-login">Sign in here</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Floating Login Card (Toggled when clicking 'Sign in here') -->
+            <div class="landing-signup-card" id="login-form-view">
+                <div class="signup-card-header">
+                    <div class="signup-avatar-box">
+                        <i data-lucide="user-check" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <h3>Welcome Back</h3>
+                    <p>Access your LungPredict assessment profile</p>
+                </div>
+
+                <form id="login-form" onsubmit="event.preventDefault();">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <div class="input-container">
+                            <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+                            <input type="email" id="login-email" class="input-control" placeholder="name@health.com" required autocomplete="email">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="input-container">
+                            <i data-lucide="lock" style="width: 18px; height: 18px;"></i>
+                            <input type="password" id="login-password" class="input-control" placeholder="••••••••" required autocomplete="current-password">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="btn-login-submit" style="width: 100%; padding: 15px; margin-top: 10px;">
+                        <span>Sign In to Dashboard →</span>
+                    </button>
+                    
+                    <button type="button" class="btn btn-secondary" id="btn-guest-login" style="width: 100%; padding: 15px; margin-top: 12px; border-radius: 30px;">
+                        <i data-lucide="user-plus"></i>
+                        <span>Continue as Anonymous Guest</span>
+                    </button>
+
+                    <div class="landing-form-footer">
+                        Don't have an account? <a href="#" id="go-to-register">Register here</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         MAIN CLINICAL DASHBOARD SECTION
+         ========================================================================== -->
+    <section id="app-dashboard">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div>
+                <div class="sidebar-header">
+                    <i data-lucide="activity"></i>
+                    <span>LungPredict</span>
+                </div>
+                
+                <nav class="sidebar-nav">
+    <a class="nav-item active" data-target="overview-view">
+        <i data-lucide="layout-dashboard"></i>
+        <span>Overview</span>
+    </a>
+    <a class="nav-item" data-target="predictor-view" id="nav-predictor">
+        <svg fill="currentColor" class="lucide" viewBox="0 0 16 16" style="width: 20px; height: 20px;">
+            <path d="M8.5 1.5a.5.5 0 1 0-1 0v5.243L7 7.1V4.72C7 3.77 6.23 3 5.28 3c-.524 0-1.023.27-1.443.592-.431.332-.847.773-1.216 1.229-.736.908-1.347 1.946-1.58 2.48-.176.405-.393 1.16-.556 2.011-.165.857-.283 1.857-.241 2.759.04.867.233 1.79.838 2.33.67.6 1.622.556 2.741-.004l1.795-.897A2.5 2.5 0 0 0 7 11.264V10.5a.5.5 0 0 0-1 0v.764a1.5 1.5 0 0 1-.83 1.342l-1.794.897c-.978.489-1.415.343-1.628.152-.28-.25-.467-.801-.505-1.63-.037-.795.068-1.71.224-2.525.157-.82.357-1.491.491-1.8.19-.438.75-1.4 1.44-2.25.342-.422.703-.799 1.049-1.065.358-.276.639-.385.833-.385a.72.72 0 0 1 .72.72v3.094l-1.79 1.28a.5.5 0 0 0 .58.813L8 7.614l3.21 2.293a.5.5 0 1 0 .58-.814L10 7.814V4.72a.72.72 0 0 1 .72-.72c.194 0 .475.11.833.385.346.266.706.643 1.05 1.066.688.85 1.248 1.811 1.439 2.249.134.309.334.98.491 1.8.156.814.26 1.73.224 2.525-.038.829-.224 1.38-.505 1.63-.213.19-.65.337-1.628-.152l-1.795-.897A1.5 1.5 0 0 1 10 11.264V10.5a.5.5 0 0 0-1 0v.764a2.5 2.5 0 0 0 1.382 2.236l1.795.897c1.12.56 2.07.603 2.741.004.605-.54.798-1.463.838-2.33.042-.902-.076-1.902-.24-2.759-.164-.852-.38-1.606-.558-2.012-.232-.533-.843-1.571-1.579-2.479-.37-.456-.785-.897-1.216-1.229C11.743 3.27 11.244 3 10.72 3 9.77 3 9 3.77 9 4.72V7.1l-.5-.357z"/>
+        </svg>
+        <span>Risk Predictor</span>
+    </a>
+    <a class="nav-item" data-target="history-view">
+        <i data-lucide="file-text"></i>
+        <span>Report</span>
+    </a>
+    <a class="nav-item" data-target="resources-view">
+        <i data-lucide="book-open"></i>
+        <span>Health Resources</span>
+    </a>
+    <a class="nav-item" data-target="tips-view">
+        <i data-lucide="sparkles"></i>
+        <span>Health Tips</span>
+    </a>
+    <a class="nav-item" data-target="future-predict-view" id="nav-future-predict">
+        <i data-lucide="trending-up"></i>
+        <span>Future Enhance Predict</span>
+    </a>
+    <a class="nav-item" data-target="settings-view">
+        <i data-lucide="settings"></i>
+        <span>Profile & Settings</span>
+    </a>
+</nav>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="user-quick-profile">
+                    <div class="avatar" id="user-avatar-char">U</div>
+                    <div class="user-info">
+                        <div class="username-display" id="user-display-name">Username</div>
+                        <div class="role-display" id="user-display-role">Clinical Profile</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-secondary" id="btn-logout" style="width: 100%; justify-content: flex-start;">
+                    <i data-lucide="log-out"></i>
+                    <span>Sign Out</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace (Header + Active View panel) -->
+        <div class="main-wrapper">
+            
+            <!-- Global Top Bar Header -->
+            <header>
+                <div class="header-title-area">
+                    <h2 id="current-view-title">Overview Dashboard</h2>
+                </div>
+                
+                <div class="header-right-controls">
+                    <div class="clock-widget" id="header-clock">
+                        00:00:00 AM
+                    </div>
+                    <button class="theme-toggle" id="btn-theme-toggle" title="Toggle visual theme">
+                        <i data-lucide="sun"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dynamic SPA Views Container -->
+            <main class="content-container">
+
+                <!-- -------------------------------------------------------------
+                     VIEW 1: OVERVIEW / DASHBOARD HOME
+                     ------------------------------------------------------------- -->
+                <div id="overview-view" class="app-view active">
+                    <div class="welcome-banner glass-card">
+                        <div class="welcome-banner-content" style="text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                            <h1>Hello, <span id="welcome-username">Patient</span>!</h1>
+                            <p style="max-width: 650px; margin: 0 auto 15px auto; line-height: 1.6;">Evaluate your respiratory health indicators instantly with our secure, AI-powered diagnostic engine. Complete a quick risk assessment to generate your personalized clinical report.</p>
+                            <button class="btn btn-primary" onclick="document.querySelector('#nav-predictor').click()" style="padding: 14px 32px; font-size: 17.5px; font-weight: 700; border-radius: 16px; display: inline-flex; align-items: center; gap: 12px; transition: transform 0.2s ease;">
+                                <i data-lucide="play-circle" style="width: 20px; height: 20px;"></i>
+                                <span>Lung Predictor</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Metrics summary boxes -->
+                    <div class="metrics-grid">
+                        <div class="metric-card glass-card">
+                            <div class="metric-icon blue">
+                                <i data-lucide="file-spreadsheet"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h4>Total Assessments</h4>
+                                <div class="metric-value" id="stat-total-assessments">0</div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card glass-card">
+                            <div class="metric-icon emerald" id="stat-risk-icon">
+                                <i data-lucide="shield-check"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h4>Latest Risk Level</h4>
+                                <div class="metric-value" id="stat-latest-risk">N/A</div>
+                            </div>
+                        </div>
+
+                        <div class="metric-card glass-card">
+                            <div class="metric-icon blue">
+                                <i data-lucide="calendar"></i>
+                            </div>
+                            <div class="metric-info">
+                                <h4>Last Screening Date</h4>
+                                <div class="metric-value" id="stat-last-scan">Never</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lower Panels -->
+                    <div class="dashboard-layout-panels">
+                        
+                        <!-- Left Stack: Standalone CT Scan + Recent Predictions -->
+                        <div style="display: flex; flex-direction: column; gap: 25px;">
+                            
+
+
+                            <!-- Panel A: Recent Predictions -->
+                            <div class="glass-card" style="padding: 30px;">
+                                <div class="panel-header">
+                                    <h3>Recent Lung Risk Profiles</h3>
+                                    <button class="btn btn-secondary" onclick="document.querySelector('[data-target=history-view]').click()" style="padding: 6px 12px; font-size: 0.8rem;">
+                                        <span>View All</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="activity-list" id="dashboard-recent-list">
+                                    <!-- Dynamic List Inserted via app.js -->
+                                </div>
+                            </div>
+
+                            <!-- Panel A2: Health Reminder -->
+                            <div class="glass-card" style="padding: 25px; background: linear-gradient(135deg, rgba(16,185,129,0.05) 0%, rgba(14,165,233,0.05) 100%);">
+                                <div style="display: flex; align-items: flex-start; gap: 15px;">
+                                    <div style="width: 48px; height: 48px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); flex-shrink: 0;">
+                                        <i data-lucide="leaf" style="color: var(--accent-emerald);"></i>
+                                    </div>
+                                    <div>
+                                        <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--text-primary);">Did you know?</h4>
+                                        <ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+                                            <li style="margin-bottom: 6px;">Regular breathing exercises can increase lung capacity by up to 20% over 6 months.</li>
+                                            <li style="margin-bottom: 6px;">Indoor air pollution can be up to 5 times worse than outdoor air. Ensure good ventilation.</li>
+                                            <li style="margin-bottom: 6px;">Staying hydrated helps thin the mucus in your lungs, making it easier to breathe.</li>
+                                            <li>Even light aerobic exercise helps strengthen the respiratory muscles over time.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Stack: Recommendations & Chart -->
+                        <div style="display: flex; flex-direction: column; gap: 25px;">
+                            
+                            <!-- Panel B: Daily Recommendation List (Clean minimal list) -->
+                            <div class="glass-card advice-widget">
+                                <div class="advice-card-header">
+                                    <i data-lucide="lightbulb" style="color: var(--accent-teal);"></i>
+                                    <span>Daily Clinical Recommendations</span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
+                                    <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                        <i data-lucide="shield-check" style="color: var(--accent-teal); width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;"></i>
+                                        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.4;">
+                                            <strong>Environmental Toxins:</strong> Avoid air corridors with heavy combustion, secondary smoke, or industrial chemicals.
+                                        </p>
+                                    </div>
+                                    <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                        <i data-lucide="heart-pulse" style="color: var(--accent-teal); width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;"></i>
+                                        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.4;">
+                                            <strong>Aerobic Conditioning:</strong> Participate in 30 minutes of daily moderate activity to increase alveolar capacity.
+                                        </p>
+                                    </div>
+                                    <div style="display: flex; gap: 12px; align-items: flex-start;">
+                                        <i data-lucide="activity" style="color: var(--accent-teal); width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;"></i>
+                                        <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.4;">
+                                            <strong>Symptom Journaling:</strong> Log respiratory shifts, dry cough, or thoracic chest strain in your Local History immediately.
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- Action button relocated to Hello, Patient! welcome banner -->
+                            </div>
+
+                            <!-- Panel C: Risk Trends Chart -->
+                            <div class="glass-card" style="padding: 25px;">
+                                <div class="panel-header" style="margin-bottom: 15px;">
+                                    <h3 style="display: flex; align-items: center; gap: 8px;">
+                                        <i data-lucide="line-chart" style="color: var(--accent-teal);"></i>
+                                        Historical Risk Trend
+                                    </h3>
+                                </div>
+                                <div style="width: 100%; height: 250px; position: relative;">
+                                    <canvas id="risk-trend-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- -------------------------------------------------------------
+                     VIEW 2: LUNG CANCER RISK PREDICTOR (Multi-Step Form)
+                     ------------------------------------------------------------- -->
+                <div id="predictor-view" class="app-view">
+                    <div class="predictor-flow">
+                        
+                        <!-- Left Panel: Form Steps -->
+                        <div class="glass-card predictor-card">
+                            
+                            <!-- Steps Indicators -->
+                            <div class="predictor-steps">
+                                <div class="step-indicator active" data-step="1">1</div>
+                                <div class="step-indicator" data-step="2">2</div>
+                                <div class="step-indicator" data-step="3">3</div>
+                                <div class="step-indicator" data-step="4">R</div>
+                            </div>
+
+                            <form id="prediction-steps-form">
+                                
+                                <!-- STEP 1: Demographics -->
+                                <div id="form-step-1" class="form-step active">
+                                    <div class="step-header">
+                                        <h3>Demographics & Physical Profiling</h3>
+                                        <p>Please enter structural parameters for clinical baseline adjustments.</p>
+                                    </div>
+                                    
+                                    <div class="questions-grid">
+                                        <div class="question-item">
+                                            <label class="question-label" for="param-patient-name">Patient Name (Optional)</label>
+                                            <input type="text" id="param-patient-name" class="input-control" placeholder="e.g. John Doe" style="padding-left: 20px;">
+                                        </div>
+
+                                        <div class="question-item">
+                                            <label class="question-label" for="param-age">Patient Age (in Years)</label>
+                                            <input type="number" id="param-age" class="input-control" min="1" max="120" placeholder="e.g. 45" style="padding-left: 20px;" required>
+                                        </div>
+
+                                        <div class="question-item">
+                                            <label class="question-label">Biological Gender</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-gender" value="2" checked required>
+                                                    <div class="choice-card">
+                                                        <i data-lucide="user"></i>
+                                                        <span>Male</span>
+                                                    </div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-gender" value="1" required>
+                                                    <div class="choice-card">
+                                                        <i data-lucide="user"></i>
+                                                        <span>Female</span>
+                                                    </div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-gender" value="3" required>
+                                                    <div class="choice-card">
+                                                        <i data-lucide="user"></i>
+                                                        <span>Other</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- CT Scan Upload & Analysis Area -->
+                                    <div class="ct-scan-upload-section" style="display: none !important;" id="ct-dropzone">
+                                        <input type="file" id="ct-file-input" accept="image/*,.dcm,.nii" style="display: none;">
+                                        <div class="upload-icon-box" style="width: 48px; height: 48px; border-radius: 12px; background: rgba(139, 92, 246, 0.08); color: #8b5cf6; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px auto;">
+                                            <i data-lucide="scan" style="width: 24px; height: 24px;"></i>
+                                        </div>
+                                        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;">Upload Clinical CT Scan (Optional)</h4>
+                                        <p style="font-size: 0.8rem; color: var(--text-secondary); max-width: 450px; margin: 0 auto 10px auto;">Drag & drop high-resolution DICOM slices, NIfTI volumes, or chest X-rays to analyze lung tissue mutations with AI precision.</p>
+                                        
+                                        <!-- Selected File & Analysis Status -->
+                                        <div id="ct-upload-status" style="display: none; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; padding: 8px 12px; background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; color: var(--accent-emerald); font-size: 0.85rem; font-weight: 600; width: fit-content; margin-left: auto; margin-right: auto;">
+                                            <i data-lucide="check-circle" style="width: 16px; height: 16px;"></i>
+                                            <span id="ct-filename" style="text-decoration: underline;">file.dcm</span>
+                                            <span style="font-weight: 400; color: var(--text-muted);">|</span>
+                                            <span id="ct-nodule-status">No abnormal nodules detected</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 2: Symptoms Tracker -->
+                                <div id="form-step-2" class="form-step">
+                                    <div class="step-header">
+                                        <h3>Symptom & Airway Disruption Logs</h3>
+                                        <p>Indicate any respiratory or thoracic issues experienced persistently.</p>
+                                    </div>
+                                    
+                                    <div class="questions-grid compact-symptoms">
+                                        <!-- Coughing -->
+                                        <div class="question-item">
+                                            <label class="question-label">Persistent/Chronic Coughing?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-coughing" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-coughing" value="1.5" required>
+                                                    <div class="choice-card">Mild</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-coughing" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Wheezing -->
+                                        <div class="question-item">
+                                            <label class="question-label">Wheezing or High-Pitched Breathing?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-wheezing" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-wheezing" value="1.5" required>
+                                                    <div class="choice-card">Mild</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-wheezing" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Shortness of breath -->
+                                        <div class="question-item">
+                                            <label class="question-label">Frequent Shortness of Breath (Dyspnea)?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-shortness" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-shortness" value="1.5" required>
+                                                    <div class="choice-card">Mild</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-shortness" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Chest Pain -->
+                                        <div class="question-item">
+                                            <label class="question-label">Thoracic or Chest Pain (worsens with deep breaths)?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-chest-pain" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-chest-pain" value="1.5" required>
+                                                    <div class="choice-card">Mild</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-chest-pain" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Swallowing Difficulty -->
+                                        <div class="question-item">
+                                            <label class="question-label">Dysphagia (Difficulty Swallowing)?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-swallowing" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-swallowing" value="1.5" required>
+                                                    <div class="choice-card">Mild</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-swallowing" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Fatigue -->
+                                        <div class="question-item">
+                                            <label class="question-label">Chronic, Unexplained Fatigue or Tiredness?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-fatigue" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-fatigue" value="1.5" required>
+                                                    <div class="choice-card">Mild</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-fatigue" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 3: Risk Factors & Behaviors -->
+                                <div id="form-step-3" class="form-step">
+                                    <div class="step-header">
+                                        <h3>Clinical Risks, Exposure & History</h3>
+                                        <p>Answer truthfully regarding chemical exposures, habits, and family history.</p>
+                                    </div>
+                                    
+                                    <div class="questions-grid compact-symptoms">
+                                        <!-- Smoking -->
+                                        <div class="question-item">
+                                            <label class="question-label">Do you consume tobacco or smoke?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-smoking" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-smoking" value="1.5" required>
+                                                    <div class="choice-card">Ex-smoker</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-smoking" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Alcohol consuming -->
+                                        <div class="question-item">
+                                            <label class="question-label">Alcohol Consumption (Moderate to Frequent)?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-alcohol" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-alcohol" value="1.5" required>
+                                                    <div class="choice-card">Occasional</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-alcohol" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Chronic Disease -->
+                                        <div class="question-item">
+                                            <label class="question-label">History of Chronic Disease (Asthma, COPD, Diabetes)?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-chronic" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-chronic" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Allergies -->
+                                        <div class="question-item">
+                                            <label class="question-label">Environmental or Chemical Allergies?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-allergy" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-allergy" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Yellow Fingers -->
+                                        <div class="question-item">
+                                            <label class="question-label">Discolored or Yellow Fingers (associated with nicotine/tar residue)?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-yellow-fingers" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-yellow-fingers" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Anxiety -->
+                                        <div class="question-item">
+                                            <label class="question-label">Severe Anxiety / Panic Attacks?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-anxiety" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-anxiety" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Peer Pressure -->
+                                        <div class="question-item">
+                                            <label class="question-label">Peer Pressure to Smoke or Drink?</label>
+                                            <div class="binary-choices-grid">
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-peer" value="2" required>
+                                                    <div class="choice-card">Yes</div>
+                                                </div>
+                                                <div class="choice-box">
+                                                    <input type="radio" name="param-peer" value="1" checked required>
+                                                    <div class="choice-card">No</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- STEP 4: Live Results Section -->
+                                <div id="form-step-4" class="form-step">
+                                    <div class="result-gauge-panel">
+                                        <div class="gauge-wrapper">
+                                            <svg class="gauge-svg" viewBox="0 0 220 220">
+                                                <circle class="gauge-bg" cx="110" cy="110" r="100"></circle>
+                                                <circle class="gauge-fill" id="results-gauge-path" cx="110" cy="110" r="100"></circle>
+                                            </svg>
+                                            <div class="gauge-center-text">
+                                                <div class="gauge-percentage" id="results-score-percent">0%</div>
+                                                <div class="gauge-label">Risk Index</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="result-badge" id="results-risk-tier">Calculating...</div>
+                                        <p class="result-explanation" id="results-tier-explanation"></p>
+                                        
+                                        <div class="result-factors-box">
+                                            <h4>Identified High-Risk Contributors:</h4>
+                                            <div class="contributing-factors-list" id="results-contributors-list">
+                                                <!-- Dynamic List of bad factors -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Form navigation block -->
+                                <div class="form-navigation" style="display: flex; justify-content: center; align-items: center; gap: 15px;">
+                                    <button type="button" class="btn btn-secondary" id="btn-form-prev" style="visibility: hidden;">
+                                        <i data-lucide="arrow-left"></i>
+                                        <span>Back</span>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btn-form-next">
+                                        <span>Proceed</span>
+                                        <i data-lucide="arrow-right"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-primary" id="btn-form-finish" style="display: none;">
+                                        <i data-lucide="save"></i>
+                                        <span>Commit & Save Assessment</span>
+                                    </button>
+                                </div>
+
+                            </form>
+                        </div>
+
+                        <!-- Right Panel: Info & Assistance -->
+                        <div class="glass-card" style="padding: 40px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div>
+                                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                    <i data-lucide="shield-check" style="color: var(--accent-teal);"></i>
+                                    <span>Methodology & Variables</span>
+                                </h3>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px;">The LungPredict screening framework compiles clinical risk coefficients derived from authoritative thoracic oncology datasets, including peer-reviewed papers from the National Lung Screening Trial (NLST). Inputs are parsed by our in-memory predictive engine to analyze relative risks across environmental, demographic, and behavioral health vectors.</p>
+                                
+                                <div style="display: flex; flex-direction: column; gap: 15px;">
+                                    <div class="glass-card" style="padding: 15px; border-color: rgba(14, 165, 233, 0.15); background: rgba(14, 165, 233, 0.02);">
+                                        <h5 style="font-size: 0.85rem; font-weight: 700; color: var(--accent-teal); margin-bottom: 6px;">Demographics</h5>
+                                        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">Age serves as an exponential risk multiplier in computational models. Clinical data indicates that somatic gene mutations and lung tissue vulnerabilities escalate significantly past age 45. Gender profiles calibrate baseline risk coefficients based on gender-stratified epidemiological surveys.</p>
+                                    </div>
+                                    <div class="glass-card" style="padding: 15px; border-color: rgba(239, 68, 68, 0.15); background: rgba(239, 68, 68, 0.02);">
+                                        <h5 style="font-size: 0.85rem; font-weight: 700; color: var(--risk-high); margin-bottom: 6px;">Primary Symptoms</h5>
+                                        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">Biomarkers like persistent coughing, wheezing, localized chest pain, chronic fatigue, and progressive shortness of breath (dyspnea) are calculated as heavy additive factor weights. The persistent presence of multiple symptoms triggers critical elevation thresholds.</p>
+                                    </div>
+                                    <div class="glass-card" style="padding: 15px; border-color: rgba(245, 158, 11, 0.15); background: rgba(245, 158, 11, 0.02);">
+                                        <h5 style="font-size: 0.85rem; font-weight: 700; color: var(--risk-medium); margin-bottom: 6px;">Behavioral Indicators</h5>
+                                        <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">Direct tobacco smoking and high alcohol intake are processed as synergistic mutational hazards. Chronic exposure to second-hand chemical smoke, occupational toxins (radon, asbestos), or industrial fine particulates amplifies bronchial cellular vulnerability indices.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="border-top: 1px solid var(--glass-border); padding-top: 25px; margin-top: 30px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
+                                🔐 <strong>Data Isolation Protocol:</strong> All values and screening inputs are processed purely inside your browser memory cache. No medical, identifiable, or telemetry data is transmitted to remote servers, aligning fully with HIPAA confidentiality boundaries.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- -------------------------------------------------------------
+                     VIEW 2.5: FUTURE ENHANCE PREDICT
+                     ------------------------------------------------------------- -->
+                <div id="future-predict-view" class="app-view">
+                    <div class="future-dashboard">
+                        
+                        <!-- Main Content Area -->
+                        <div class="future-dashboard-main">
+                            
+                            <!-- Hero Row -->
+                            <div class="future-hero-row">
+                                <div class="premium-card premium-hero-card">
+                                    <div style="display: flex; align-items: center; justify-content: space-between;">
+                                        <div style="max-width: 60%;">
+                                            <h2 style="font-size: 2rem; font-weight: 800; color: #111827; margin-bottom: 12px; line-height: 1.2;">Your Lung Health,<br>Powered by AI</h2>
+                                            <p style="font-size: 0.95rem; color: #64748b; margin-bottom: 24px; line-height: 1.5;">Real-time tracking and predictive analytics for a healthier tomorrow.</p>
+                                            <button id="btn-live-data" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.95rem; border-radius: 12px; box-shadow: 0 8px 20px rgba(139, 92, 246, 0.25); transition: all 0.3s ease;">
+                                                <i data-lucide="activity" style="width: 18px; height: 18px;"></i>
+                                                <span id="btn-live-data-text">View Live Data</span>
+                                            </button>
+                                        </div>
+                                        <div style="position: relative; width: 140px; height: 140px; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%); border-radius: 50%;">
+                                            <img src="assets/smartwatch.png" alt="AI Smartwatch" style="width: 130px; height: 130px; object-fit: contain; filter: drop-shadow(0 15px 25px rgba(139, 92, 246, 0.2)); z-index: 2; border-radius: 20px;">
+                                            <div class="lungs-orbit" style="border-color: rgba(139, 92, 246, 0.3); z-index: 1;">
+                                                <div class="lungs-orbit-dot"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="premium-card" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                    <h3 style="font-size: 1.1rem; font-weight: 700; color: #111827; margin-bottom: 15px;">AI Health Score</h3>
+                                    <div style="position: relative; width: 120px; height: 120px; margin-bottom: 15px;">
+                                        <canvas id="fp-health-score-chart"></canvas>
+                                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                            <span style="font-size: 1.8rem; font-weight: 800; color: #111827; line-height: 1;">82</span>
+                                            <span style="font-size: 0.75rem; color: #64748b;">/100</span>
+                                        </div>
+                                    </div>
+                                    <div class="status-pill good" style="margin-bottom: 8px;">Good</div>
+                                    <p style="font-size: 0.75rem; color: #94a3b8;">Your vitals are stable and within optimal ranges.</p>
+                                </div>
+                            </div>
+
+                            <!-- Vitals Cards Row -->
+                            <div class="future-vitals-row">
+                                <div class="vital-mini-card">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                        <div class="vital-icon-box"><i data-lucide="heart" style="width: 18px; height: 18px;"></i></div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: #22C55E;">Normal</span>
+                                    </div>
+                                    <div>
+                                        <div class="vital-value"><span id="live-metric-hr">72</span> <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 500;">bpm</span></div>
+                                        <div class="vital-label">Heart Rate</div>
+                                    </div>
+                                    <div class="vital-chart-container"><canvas id="fp-spark-hr"></canvas></div>
+                                </div>
+                                <div class="vital-mini-card">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                        <div class="vital-icon-box" style="background: #eff6ff; color: #3b82f6;"><i data-lucide="droplets" style="width: 18px; height: 18px;"></i></div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: #22C55E;">Optimal</span>
+                                    </div>
+                                    <div>
+                                        <div class="vital-value"><span id="live-metric-spo2">98</span> <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 500;">%</span></div>
+                                        <div class="vital-label">Blood Oxygen (SpO2)</div>
+                                    </div>
+                                    <div class="vital-chart-container"><canvas id="fp-spark-spo2"></canvas></div>
+                                </div>
+                                <div class="vital-mini-card">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                        <div class="vital-icon-box" style="background: #f0fdf4; color: #22c55e;"><i data-lucide="wind" style="width: 18px; height: 18px;"></i></div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: #22C55E;">Normal</span>
+                                    </div>
+                                    <div>
+                                        <div class="vital-value"><span id="live-metric-resp">16</span> <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 500;">rpm</span></div>
+                                        <div class="vital-label">Respiratory Rate</div>
+                                    </div>
+                                    <div class="vital-chart-container"><canvas id="fp-spark-resp"></canvas></div>
+                                </div>
+                                <div class="vital-mini-card">
+                                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                        <div class="vital-icon-box" style="background: #fef2f2; color: #ef4444;"><i data-lucide="activity-square" style="width: 18px; height: 18px;"></i></div>
+                                        <span style="font-size: 0.75rem; font-weight: 600; color: #f59e0b;">Moderate</span>
+                                    </div>
+                                    <div>
+                                        <div class="vital-value"><span id="live-metric-stress">45</span> <span style="font-size: 0.8rem; color: #94a3b8; font-weight: 500;">/100</span></div>
+                                        <div class="vital-label">Stress Level</div>
+                                    </div>
+                                    <div class="vital-chart-container"><canvas id="fp-spark-stress"></canvas></div>
+                                </div>
+                            </div>
+
+                            <!-- Middle Row (Prediction & Table) -->
+                            <div class="future-middle-row">
+                                <div class="premium-card">
+                                    <h3 style="font-size: 1.1rem; font-weight: 700; color: #111827; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                                        <i data-lucide="radar" style="color: #8B5CF6; width: 20px; height: 20px;"></i>
+                                        Risk Prediction
+                                    </h3>
+                                    <div style="display: flex; gap: 20px; align-items: center; margin-bottom: 20px;">
+                                        <div style="position: relative; width: 90px; height: 90px; flex-shrink: 0;">
+                                            <canvas id="fp-risk-meter"></canvas>
+                                            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center;">
+                                                <span style="font-size: 1.2rem; font-weight: 800; color: #ef4444;">21%</span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p style="font-size: 0.85rem; color: #64748b; line-height: 1.5; margin-bottom: 8px;">AI projection indicates a low probability of structural lung abnormalities based on current biomarker trends.</p>
+                                            <div style="width: 100%; height: 6px; background: linear-gradient(to right, #22c55e, #f59e0b, #ef4444); border-radius: 3px; position: relative;">
+                                                <div style="position: absolute; top: -4px; left: 21%; width: 14px; height: 14px; background: #ffffff; border: 2px solid #111827; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="height: 120px; width: 100%; position: relative;">
+                                        <canvas id="fp-risk-projection"></canvas>
+                                    </div>
+                                </div>
+
+                                <div class="premium-card">
+                                    <h3 style="font-size: 1.1rem; font-weight: 700; color: #111827; margin-bottom: 15px;">Vital Signs Analytics</h3>
+                                    <div class="future-table-wrapper">
+                                        <table class="future-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Metric</th>
+                                                    <th>Latest Value</th>
+                                                    <th>Trend</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="heart" style="width: 14px; height: 14px; color: #8B5CF6;"></i> Heart Rate</div></td>
+                                                    <td>72 bpm</td>
+                                                    <td style="width: 80px; position: relative;"><canvas id="fp-table-spark-1" style="height: 20px; width: 100%;"></canvas></td>
+                                                    <td><span class="status-pill good">Normal</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="droplets" style="width: 14px; height: 14px; color: #3b82f6;"></i> SpO2</div></td>
+                                                    <td>98%</td>
+                                                    <td style="width: 80px; position: relative;"><canvas id="fp-table-spark-2" style="height: 20px; width: 100%;"></canvas></td>
+                                                    <td><span class="status-pill good">Good</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="wind" style="width: 14px; height: 14px; color: #22c55e;"></i> Resp Rate</div></td>
+                                                    <td>16 rpm</td>
+                                                    <td style="width: 80px; position: relative;"><canvas id="fp-table-spark-3" style="height: 20px; width: 100%;"></canvas></td>
+                                                    <td><span class="status-pill good">Normal</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="moon" style="width: 14px; height: 14px; color: #6366f1;"></i> Sleep</div></td>
+                                                    <td>7h 20m</td>
+                                                    <td style="width: 80px; position: relative;"><canvas id="fp-table-spark-4" style="height: 20px; width: 100%;"></canvas></td>
+                                                    <td><span class="status-pill normal">Adequate</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><div style="display: flex; align-items: center; gap: 8px;"><i data-lucide="activity-square" style="width: 14px; height: 14px; color: #ef4444;"></i> Stress</div></td>
+                                                    <td>45/100</td>
+                                                    <td style="width: 80px; position: relative;"><canvas id="fp-table-spark-5" style="height: 20px; width: 100%;"></canvas></td>
+                                                    <td><span class="status-pill normal">Moderate</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Bottom Analytics Row -->
+                            <div class="future-bottom-row">
+                                <div class="premium-card" style="padding: 16px;">
+                                    <h5 style="font-size: 0.8rem; color: #64748b; font-weight: 600; margin-bottom: 10px;">Daily Steps</h5>
+                                    <div style="font-size: 1.4rem; font-weight: 700; color: #111827; margin-bottom: 10px;">8,432</div>
+                                    <div style="height: 40px; position: relative;"><canvas id="fp-bottom-spark-1"></canvas></div>
+                                </div>
+                                <div class="premium-card" style="padding: 16px;">
+                                    <h5 style="font-size: 0.8rem; color: #64748b; font-weight: 600; margin-bottom: 10px;">Active Minutes</h5>
+                                    <div style="font-size: 1.4rem; font-weight: 700; color: #111827; margin-bottom: 10px;">45 min</div>
+                                    <div style="height: 40px; position: relative;"><canvas id="fp-bottom-spark-2"></canvas></div>
+                                </div>
+                                <div class="premium-card" style="padding: 16px;">
+                                    <h5 style="font-size: 0.8rem; color: #64748b; font-weight: 600; margin-bottom: 10px;">Calories Burned</h5>
+                                    <div style="font-size: 1.4rem; font-weight: 700; color: #111827; margin-bottom: 10px;">2,140 kcal</div>
+                                    <div style="height: 40px; position: relative;"><canvas id="fp-bottom-spark-3"></canvas></div>
+                                </div>
+                                <div class="premium-card" style="padding: 16px;">
+                                    <h5 style="font-size: 0.8rem; color: #64748b; font-weight: 600; margin-bottom: 10px;">Avg Resting HR</h5>
+                                    <div style="font-size: 1.4rem; font-weight: 700; color: #111827; margin-bottom: 10px;">62 bpm</div>
+                                    <div style="height: 40px; position: relative;"><canvas id="fp-bottom-spark-4"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Sidebar Area -->
+                        <div class="future-dashboard-sidebar">
+                            
+                            <!-- Key Insights Card -->
+                            <div class="premium-card">
+                                <h3 style="font-size: 1.1rem; font-weight: 700; color: #111827; margin-bottom: 20px;">Key Insights</h3>
+                                
+                                <div class="insight-item">
+                                    <div class="insight-icon"><i data-lucide="moon" style="width: 18px; height: 18px;"></i></div>
+                                    <div class="insight-content">
+                                        <h4>Sleep Quality Improved</h4>
+                                        <p>You averaged 30m more deep sleep this week compared to last week.</p>
+                                    </div>
+                                </div>
+                                <div class="insight-item">
+                                    <div class="insight-icon" style="background: #f0fdf4; color: #22c55e;"><i data-lucide="footprints" style="width: 18px; height: 18px;"></i></div>
+                                    <div class="insight-content">
+                                        <h4>Step Goal on Track</h4>
+                                        <p>You're pacing well to hit your 10,000 daily steps target by 6 PM.</p>
+                                    </div>
+                                </div>
+                                <div class="insight-item">
+                                    <div class="insight-icon" style="background: #eff6ff; color: #3b82f6;"><i data-lucide="cloud-fog" style="width: 18px; height: 18px;"></i></div>
+                                    <div class="insight-content">
+                                        <h4>Air Quality is Good</h4>
+                                        <p>Local AQI is currently 42. Great time for outdoor aerobic exercise.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recommendations Card -->
+                            <div class="premium-card">
+                                <h3 style="font-size: 1.1rem; font-weight: 700; color: #111827; margin-bottom: 20px;">AI Recommendations</h3>
+                                
+                                <div style="display: flex; flex-direction: column; gap: 12px;">
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="wind" style="color: #8B5CF6; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Do 5 mins of Box Breathing</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="droplet" style="color: #3b82f6; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Drink 500ml of Water</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="calendar-check" style="color: #ef4444; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Schedule Yearly Screening</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(34, 197, 94, 0.05); border: 1px solid rgba(34, 197, 94, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="activity" style="color: #22C55E; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Complete 30m Light Cardio</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(99, 102, 241, 0.05); border: 1px solid rgba(99, 102, 241, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="moon" style="color: #6366f1; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Aim for 8 Hours of Sleep</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="sun" style="color: #f59e0b; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Take Morning Vitamin D</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(20, 184, 166, 0.05); border: 1px solid rgba(20, 184, 166, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="fan" style="color: #14b8a6; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Turn on Air Purifier Tonight</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(100, 116, 139, 0.05); border: 1px solid rgba(100, 116, 139, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="cloud-fog" style="color: #64748b; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Avoid High AQI Zones Today</div>
+                                    </div>
+                                    <div style="padding: 12px; border-radius: 12px; background: rgba(236, 72, 153, 0.05); border: 1px solid rgba(236, 72, 153, 0.1); display: flex; align-items: center; gap: 12px;">
+                                        <i data-lucide="scale" style="color: #ec4899; width: 20px; height: 20px;"></i>
+                                        <div style="font-size: 0.85rem; color: #111827; font-weight: 500;">Log Daily Dietary Intake</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- -------------------------------------------------------------
+                     VIEW 3: REPORT
+                     ------------------------------------------------------------- -->
+                <div id="history-view" class="app-view">
+                    <div class="glass-card" style="padding: 40px;">
+                        
+                        <!-- History Header / Search Control -->
+                        <div class="history-controls" style="justify-content: flex-end;">
+                            
+                            <div class="history-actions-buttons">
+                                <button class="btn btn-secondary" id="btn-export-history">
+                                    <i data-lucide="download"></i>
+                                    <span>Export Records</span>
+                                </button>
+                                <button class="btn btn-danger" id="btn-clear-history">
+                                    <i data-lucide="trash-2"></i>
+                                    <span>Clear Logs</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Data table layout -->
+                        <div class="history-table-container">
+                            <table class="history-table" id="table-history-element">
+                                <thead>
+                                    <tr>
+                                        <th>Assessment Date</th>
+                                        <th>Patient Age</th>
+                                        <th>Identified Risks Count</th>
+                                        <th>Computed Risk Score</th>
+                                        <th>Computed Severity</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="history-table-tbody">
+                                    <!-- Dynamic rows loaded via app.js -->
+                                </tbody>
+                            </table>
+
+                            <!-- Empty History State -->
+                            <div class="history-empty-state" id="history-empty-state-view">
+                                <i data-lucide="folder-open" style="width: 48px; height: 48px;"></i>
+                                <h3>No Assessment Records Found</h3>
+                                <p>You have not logged any risk assessments yet. Head over to the Risk Predictor panel to create your first report.</p>
+                                <button class="btn btn-primary" onclick="document.querySelector('#nav-predictor').click()">
+                                    <i data-lucide="plus"></i>
+                                    <span>Compute New Risk Score</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- -------------------------------------------------------------
+                     VIEW 4: HEALTH RESOURCES
+                     ------------------------------------------------------------- -->
+                <div id="resources-view" class="app-view">
+                    <div class="resources-grid">
+                        
+                        <!-- Card 1: Symptoms and Screenings -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="stethoscope" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>Indian Screening & Detection Guidelines</h3>
+                                <p>Early detection is the single most vital factor in clinical management of lung cancer. Access guidelines tailored to Indian clinical demographics.</p>
+                                <div class="resource-links">
+                                    <a href="https://tmc.gov.in" target="_blank" class="resource-link-item">
+                                        <span>Tata Memorial Centre (TMC) Guidelines</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://main.mohfw.gov.in" target="_blank" class="resource-link-item">
+                                        <span>MoHFW Cancer Screening Protocol</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Prevention & Cessation -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="heart" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>National Tobacco Cessation (India)</h3>
+                                <p>Get local quit support. Quitting tobacco decreases bronchial mutation risk immediately, starting a vital cellular healing process.</p>
+                                <div class="resource-links">
+                                    <a href="tel:1800112356" class="resource-link-item">
+                                        <span>National Toll-Free Quitline (1800-11-2356)</span>
+                                        <i data-lucide="phone" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://www.who.int/india/health-topics/tobacco" target="_blank" class="resource-link-item">
+                                        <span>WHO India Tobacco Free Initiative</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Understanding Staging -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="layers" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>ICMR Treatment & Staging Guidelines</h3>
+                                <p>Learn about Small Cell (SCLC) and Non-Small Cell (NSCLC) Lung Cancer stages based on consensus guidelines from India's apex medical body.</p>
+                                <div class="resource-links">
+                                    <a href="https://main.icmr.nic.in" target="_blank" class="resource-link-item">
+                                        <span>ICMR Lung Cancer Management Guidelines</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://ncgindia.org" target="_blank" class="resource-link-item">
+                                        <span>National Cancer Grid (NCG) Guidelines</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: Environmental & Occupational Hazards -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="shield-alert" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>Air Pollution & Environmental Risks</h3>
+                                <p>Particulate matter (PM2.5), biomass fuel combustion, and secondary smoke exposure represent major causes of lung cell DNA mutation in India.</p>
+                                <div class="resource-links">
+                                    <a href="https://cpcb.nic.in" target="_blank" class="resource-link-item">
+                                        <span>Central Pollution Control Board (CPCB)</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://moef.gov.in" target="_blank" class="resource-link-item">
+                                        <span>National Clean Air Programme (NCAP)</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: Genetic Factors & Biomarker Testing -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="dna" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>Biomarker & Genomic Testing in India</h3>
+                                <p>EGFR, ALK, and ROS1 mutations are highly prevalent in Indian non-smoker populations. Learn about local biomarker profiling clinics.</p>
+                                <div class="resource-links">
+                                    <a href="https://www.medgenome.com" target="_blank" class="resource-link-item">
+                                        <span>MedGenome India Genomics Profiling</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://strandls.com" target="_blank" class="resource-link-item">
+                                        <span>Strand Life Sciences Biomarker Guides</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: Surgical & Therapeutic Innovations -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="sparkles" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>Thoracic Oncology Centers of Excellence</h3>
+                                <p>Clinical management at India's top medical centers features minimally invasive VATS/RATS surgery, immunotherapy, and targeted treatment protocols.</p>
+                                <div class="resource-links">
+                                    <a href="https://www.aiims.edu" target="_blank" class="resource-link-item">
+                                        <span>AIIMS Thoracic Oncology Services</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://apollohospitals.com" target="_blank" class="resource-link-item">
+                                        <span>Apollo Proton Cancer Centre Care</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 7: Palliative & Supportive Care -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="hand-heart" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>Palliative & Supportive Care (India)</h3>
+                                <p>Access local networks focused on managing pain, breathlessness, and emotional distress alongside primary lung cancer treatments.</p>
+                                <div class="resource-links">
+                                    <a href="https://palliumindia.org" target="_blank" class="resource-link-item">
+                                        <span>Pallium India Supportive Care</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://palliativecare.in" target="_blank" class="resource-link-item">
+                                        <span>Indian Association of Palliative Care</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 8: Clinical Trials & Research -->
+                        <div class="glass-card resource-card">
+                            <div class="resource-banner">
+                                <i data-lucide="flask-conical" style="width: 22px; height: 22px;"></i>
+                            </div>
+                            <div class="resource-card-content">
+                                <h3>Clinical Trials Registry - India (CTRI)</h3>
+                                <p>Participating in research gives access to breakthrough therapies. Search active lung oncology trials registered under India's national registry.</p>
+                                <div class="resource-links">
+                                    <a href="http://ctri.nic.in" target="_blank" class="resource-link-item">
+                                        <span>CTRI Active Lung Oncology Trials</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                    <a href="https://main.icmr.nic.in" target="_blank" class="resource-link-item">
+                                        <span>ICMR Clinical Trials Portal</span>
+                                        <i data-lucide="external-link" style="width: 12px; height: 12px;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- -------------------------------------------------------------
+                     VIEW 4.5: HEALTH TIPS
+                     ------------------------------------------------------------- -->
+                <div id="tips-view" class="app-view">
+                    <!-- Glassmorphic Header -->
+                    <div class="welcome-banner glass-card" style="margin-bottom: 25px; background: linear-gradient(135deg, rgba(16,185,129,0.08) 0%, rgba(14,165,233,0.08) 100%);">
+                        <div class="welcome-banner-content" style="text-align: center; width: 100%;">
+                            <h1 style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 10px;">
+                                <i data-lucide="sparkles" style="color: var(--accent-teal); width: 36px; height: 36px;"></i>
+                                <span>Health Tips & Clinical Advice</span>
+                            </h1>
+                            <p style="max-width: 700px; margin: 0 auto; line-height: 1.6; color: var(--text-secondary);">Empower your thoracic resilience with evidence-based breathing techniques, nutritional protocols, and air-quality insulation tailored for optimal lung longevity.</p>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1.2fr 1.8fr; gap: 25px; margin-bottom: 25px;">
+                        
+                        <!-- Interactive Tip Generator -->
+                        <div class="glass-card" style="padding: 30px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center; min-height: 380px;">
+                            <div>
+                                <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                                    <i data-lucide="help-circle" style="color: var(--accent-emerald);"></i>
+                                    <span>Interactive Tip Generator</span>
+                                </h3>
+                                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 25px;">Generate clinical recommendations on the fly to accelerate lung cellular purification.</p>
+                            </div>
+                            
+                            <!-- Interactive Display -->
+                            <div class="glass-card" id="tip-generator-box" style="padding: 25px; width: 100%; min-height: 150px; display: flex; align-items: center; justify-content: center; background: rgba(16, 185, 129, 0.02); border-color: rgba(16, 185, 129, 0.1); margin-bottom: 25px; transition: all 0.3s ease;">
+                                <div id="tip-generator-content" style="font-size: 0.95rem; font-weight: 600; line-height: 1.6; color: var(--accent-emerald);">
+                                    Click the button below to generate your first custom lung health tip!
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" id="btn-generate-tip" style="padding: 12px 24px; border-radius: 12px; display: inline-flex; align-items: center; gap: 10px; font-weight: 700; transition: transform 0.2s ease;">
+                                <i data-lucide="refresh-cw" style="width: 18px; height: 18px;"></i>
+                                <span>Generate New Tip</span>
+                            </button>
+                        </div>
+
+                        <!-- Categorized Guidelines -->
+                        <div style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="glass-card" style="padding: 25px;">
+                                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                    <i data-lucide="wind" style="color: var(--accent-teal);"></i>
+                                    <span>Deep Breathing & Pranayama Protocols</span>
+                                </h3>
+                                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; display: flex; flex-direction: column; gap: 8px;">
+                                    <li><strong>Anulom Vilom (Alternate Nostril Breathing)</strong>: Balances respiratory pathways. Perform for 10-15 minutes daily in clean ventilation.</li>
+                                    <li><strong>Kapalbhati Pranayama</strong>: Aids in clearing active bronchial airways. Ideal for clearing mucus buildup. (Avoid if hypertensive).</li>
+                                    <li><strong>Diaphragmatic Breathing</strong>: Place one hand on chest, one on stomach. Inhale for 4 seconds, expand belly, hold for 2, exhale slowly for 6.</li>
+                                </ul>
+                            </div>
+
+                            <div class="glass-card" style="padding: 25px;">
+                                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                    <i data-lucide="leaf" style="color: var(--accent-emerald);"></i>
+                                    <span>Nutrition & Lung Cellular Recovery</span>
+                                </h3>
+                                <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; display: flex; flex-direction: column; gap: 8px;">
+                                    <li><strong>Antioxidant Rich Foods</strong>: Load up on fresh citrus fruits, berries, and raw turmeric (curcumin reduces bronchial inflammation).</li>
+                                    <li><strong>Cruciferous Veggies</strong>: Broccoli, cabbage, and cauliflower contain high glucosinolates, shielding tissue from carcinogenic mutations.</li>
+                                    <li><strong>Omega-3 Fatty Acids</strong>: Supplement with flaxseeds, walnuts, or clean fish oils to actively decrease systemic respiratory inflammation.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Additional Resources Row -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                        <div class="glass-card" style="padding: 25px;">
+                            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i data-lucide="home" style="color: var(--risk-medium);"></i>
+                                <span>Air Pollution Shielding (Indoor / Outdoor)</span>
+                            </h3>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; display: flex; flex-direction: column; gap: 8px;">
+                                <li><strong>HEPA Filtration</strong>: Install a True-HEPA air purifier inside bedrooms to capture 99.97% of fine respiratory particulates (PM2.5).</li>
+                                <li><strong>Indoor Botanicals</strong>: Snake plants, Spider plants, and Peace lilies naturally filter airborne benzene and formaldehydes.</li>
+                                <li><strong>CPCB Monitoring</strong>: Check the local Air Quality Index (AQI) daily. Avoid outdoor conditioning if AQI exceeds 150.</li>
+                            </ul>
+                        </div>
+
+                        <div class="glass-card" style="padding: 25px;">
+                            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-bottom: 15px; display: flex; align-items: center; gap: 10px;">
+                                <i data-lucide="activity" style="color: var(--accent-teal);"></i>
+                                <span>Active Cardio Conditioning</span>
+                            </h3>
+                            <ul style="margin: 0; padding-left: 20px; font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; display: flex; flex-direction: column; gap: 8px;">
+                                <li><strong>Brisk Walking</strong>: 30 minutes of daily brisk aerobic activity stimulates active alveoli expansion and carbon dioxide clearing.</li>
+                                <li><strong>Thoracic Stretching</strong>: Interlock hands behind back, pull shoulders down, and expand chest to improve structural vital capacity.</li>
+                                <li><strong>Interval Conditioning</strong>: Engage in light interval cycling or swimming to naturally elevate peak aerobic oxygen absorption.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- -------------------------------------------------------------
+                     VIEW 5: PROFILE & SETTINGS
+                     ------------------------------------------------------------- -->
+                <div id="settings-view" class="app-view">
+                    <div class="profile-layout">
+                        
+                        <!-- Left Panel: Avatar & session overview -->
+                        <div class="glass-card profile-identity-card">
+                            <div class="big-avatar" id="settings-avatar-char">U</div>
+                            <h3 id="settings-display-name">John Doe</h3>
+                            <p id="settings-display-email">patient@pulmoguard.org</p>
+                            
+                            <div class="profile-stats-mini">
+                                <div class="stat-box">
+                                    <h5>Risk Tier</h5>
+                                    <p id="settings-stat-risk" style="color: var(--risk-low);">N/A</p>
+                                </div>
+                                <div class="stat-box" style="border-left: 1px solid var(--glass-border);">
+                                    <h5>Assessments</h5>
+                                    <p id="settings-stat-count">0</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Panel: Password Change & Profile Management -->
+                        <div class="glass-card profile-settings-card">
+                            <div class="settings-header">
+                                <h3>Profile & Session Security</h3>
+                            </div>
+                            
+                            <form id="settings-profile-form" onsubmit="event.preventDefault();">
+                                <div class="form-group">
+                                    <label for="settings-name-input">Update Profile Name</label>
+                                    <div class="input-container">
+                                        <i data-lucide="user"></i>
+                                        <input type="text" id="settings-name-input" class="input-control" required autocomplete="name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="settings-new-password">New Security Password (Optional)</label>
+                                    <div class="input-container">
+                                        <i data-lucide="lock"></i>
+                                        <input type="password" id="settings-new-password" class="input-control" placeholder="Leave empty to keep current password" autocomplete="new-password">
+                                    </div>
+                                </div>
+                                
+                                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                                    <button type="submit" class="btn btn-primary" id="btn-save-settings">
+                                        <i data-lucide="save"></i>
+                                        <span>Update Profile Credentials</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         DETAILED MODAL OVERLAY (Detailed Risk Record Inspector)
+         ========================================================================== -->
+    <div class="modal-overlay" id="record-inspector-modal">
+        <div class="glass-card history-detail-modal">
+            <button class="modal-close" id="btn-close-modal">
+                <i data-lucide="x" style="width: 24px; height: 24px;"></i>
+            </button>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+                <div style="border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;">
+                    <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;">Clinical Report Detail</h3>
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: var(--text-muted); flex-wrap: wrap; gap: 5px;">
+                        <span id="modal-report-name" style="font-weight: 700; color: var(--text-primary);">Patient: N/A</span>
+                        <span id="modal-report-date">Logged on: N/A</span>
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="glass-card" style="padding: 15px;">
+                        <h5 style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">Computed Score</h5>
+                        <p style="font-size: 1.6rem; font-weight: 800;" id="modal-report-score">0%</p>
+                    </div>
+                    <div class="glass-card" style="padding: 15px;">
+                        <h5 style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px;">Severity Tier</h5>
+                        <p style="font-size: 1.3rem; font-weight: 800;" id="modal-report-severity">LOW RISK</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 12px;">Detailed Clinical Indicators Analysis:</h4>
+                    <div id="modal-symptoms-breakdown-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <!-- Dynamic analysis mapping loaded via app.js -->
+                    </div>
+                </div>
+
+                <div class="glass-card" style="padding: 20px; border-color: rgba(14, 165, 233, 0.15); background: rgba(14, 165, 233, 0.02);">
+                    <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--accent-teal); margin-bottom: 8px;">Personalized Clinical Advice:</h4>
+                    <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;" id="modal-advice-paragraph">No indicators triggered.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         CUSTOM IN-PAGE CONFIRMATION MODAL OVERLAY (No Native Dialogs!)
+         ========================================================================== -->
+    <div class="modal-overlay" id="confirm-dialog-modal">
+        <div class="glass-card" style="width: 100%; max-width: 440px; padding: 30px; display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: flex; align-items: flex-start; gap: 15px;">
+                <div style="width: 42px; height: 42px; border-radius: 50%; background: rgba(239, 68, 68, 0.1); color: var(--risk-high); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <i data-lucide="alert-triangle" style="width: 24px; height: 24px;"></i>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--text-primary);" id="confirm-title">Clinical System Prompt</h3>
+                    <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5;" id="confirm-message">Are you sure you want to proceed with this operation?</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid var(--glass-border); padding-top: 20px; margin-top: 10px;">
+                <button class="btn btn-secondary" id="btn-confirm-cancel" style="padding: 10px 20px; font-size: 15px; border-radius: 12px;">Cancel</button>
+                <button class="btn btn-primary" id="btn-confirm-proceed" style="padding: 10px 20px; font-size: 15px; border-radius: 12px; background: var(--risk-high); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); color: white;">Proceed</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main JavaScript Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
